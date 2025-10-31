@@ -14,6 +14,7 @@ export const useAuthStore = defineStore('auth', {
       try {
         const response = await axios.post('http://127.0.0.1:8000/api/login', credentials);
         this.token = response.data.token;
+        axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`;/*Исправление-Добавление*/
         this.user = response.data.user;
         this.isAuthenticated = true;
         localStorage.setItem('token', response.data.token);
@@ -33,8 +34,8 @@ export const useAuthStore = defineStore('auth', {
     async getUser() {
       this.errorMessage = "";
       try {
-        const response = await axios.post(
-          'http://127.0.0.1:8000/api/login',
+        const response = await axios.get( /*Исправлен post на get*/
+          'http://127.0.0.1:8000/api/user',/*login - user*/
           {}, // тело запроса пустое
           {
             headers: {
