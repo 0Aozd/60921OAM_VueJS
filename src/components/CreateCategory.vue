@@ -3,16 +3,14 @@
     <form @submit.prevent="createCategory" class="bg-gray-200 shadow-lg rounded-xl p-10 w-full max-w-lg">
       <h2 class="text-3xl font-bold mb-6 text-center text-gray-700">Добавление категории</h2>
 
-      <!-- Название категории -->
       <div class="mb-6">
         <label class="block text-gray-600 mb-2 font-medium">Наименование категории</label>
         <InputText type="text"
                    placeholder="Введите наименование"
                    v-model="categoryName"
-                   class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent text-lg" />
+                   class="w-full p-4 border border-gray-300 rounded-lg" />
       </div>
 
-      <!-- Загрузка изображения -->
       <div class="mb-6">
         <label for="file"
                id="file-label"
@@ -29,15 +27,12 @@
                accept="image/*" />
       </div>
 
-      <!-- Кнопка отправки -->
       <div class="flex justify-center">
         <Button type="submit"
-                label="Создать"
-                class="bg-blue-500 hover:bg-blue-600 text-white font-semibold text-lg px-8 py-3 rounded-lg transition-colors shadow-md" />
+                label="Создать"/>
       </div>
     </form>
 
-    <!-- Toast уведомления -->
     <Toast position="bottom-right" />
   </div>
 </template>
