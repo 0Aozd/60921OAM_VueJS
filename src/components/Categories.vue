@@ -12,18 +12,30 @@
              :first="offset">
     <Column field="category_id" header="№" />
     <Column field="name" header="Наименование категории" />
+    <Column field="picture_url" header="Изображение">
+      <template #body="slotProps">
+        <img :src="slotProps.data.picture_url" alt="" width="50" height="50">
+      </template>
+    </Column>
+    <template #footer>
+      <div class="text-end">
+        <Button type="button" @click="this.$router.push('/createCategory')" icon="pi pi-plus" label="Добавить категорию" />
+      </div>
+    </template>
   </DataTable>
 </template>
+
 
 
 <script>
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import { useDataStore } from '@/stores/dataStore';
+import Button from "primevue/button";
 
 export default {
   name: 'Categories',
-  components: { DataTable, Column },
+    components: { DataTable, Column, Button },
   data() {
     return {
       dataStore: useDataStore(),

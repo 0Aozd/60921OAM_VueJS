@@ -9,9 +9,36 @@ export const useDataStore = defineStore('data', {
     transactions: [],
     transactions_total: null,
     items: [],
+    errorCode: "",
     errorMessage: "",
   }),
   actions: {
+    async create_category(formData) {
+      this.errorMessage = "";
+      try {
+        const response = await axios.post(backendUrl + '/category', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: 'Bearer ' + localStorage.getItem('token')
+          },
+        });
+        this.errorCode = response.data.code;
+        this.errorMessage = response.data.message;
+      } catch (error) {
+        if (error.response) {
+          this.errorCode = 11;
+          this.errorMessage = error.response.data.message;
+          console.log(error);
+        } else if (error.request) {
+          this.errorCode = 12;
+          this.errorMessage = error.message;
+          console.log(error);
+        } else {
+          this.errorCode = 13;
+          console.log(error);
+        }
+      }
+    },
     async get_categories(page = 0, perpage = 5) {
       this.errorMessage = "";
       try {
@@ -19,7 +46,8 @@ export const useDataStore = defineStore('data', {
           params: {
             page: page,
             perpage: perpage
-          }
+          },
+          headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
         });
         this.categories = response.data;
       } catch (error) {
@@ -37,7 +65,9 @@ export const useDataStore = defineStore('data', {
     async get_categories_total() {
       this.errorMessage = "";
       try {
-        const response = await axios.get(backendUrl + '/categories_total');
+        const response = await axios.get(backendUrl + '/categories_total', {
+          headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
+        });
         this.categories_total = response.data;
       } catch (error) {
         if (error.response) {

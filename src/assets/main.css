@@ -17,9 +17,9 @@ a,
 }
 
 @media (hover: hover) {
-  a:hover {
+  /*a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);
-  }
+  }*/
 }
 
 @media (min-width: 1024px) {
@@ -29,18 +29,13 @@ a,
   }
 
   #app {
-    display: grid;
+    /*display: grid;*/
     /*grid-template-columns: 1fr 1fr;*/
     /*padding: 0 2rem;*/
     padding-left: 2rem;
     padding-right: 2rem;
   }
 }
-
-input {
-    margin-right: 10px; /*Временное исправление*/
-}
-
-button {
-    margin-left: 5px;
+:root {
+  --p-menubar-item-hover-bg: rgba(59, 130, 246, 0.15); /* Например, голубой */
 }

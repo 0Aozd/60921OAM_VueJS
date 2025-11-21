@@ -7,7 +7,7 @@
     </template>
 
     <template #item="{ item, props, hasSubmenu, root }">
-      <a class="flex items-center ml-6 p-4">
+      <a class="flex items-center p-4">
         <router-link v-if="item.route" :to="item.route">
           <span :class="item.icon"></span>
           <span class="ml-1">{{ item.label }}</span>
@@ -18,7 +18,7 @@
     <template #end>
       <div class="flex items-center gap-2">
         <div v-if="isAuthenticated && user">
-          <span class="pi pi-fw pi-user mr-4" /> {{ user.name }}
+          <span class="pi pi-fw pi-user" /> {{ user.name }}
           <Button @click="logout" class="ml-4">Выйти</Button>
         </div>
         <div v-else class="p-menubar-root-list">
@@ -43,9 +43,12 @@
 
 <script>
   import { useAuthStore } from '@/stores/authStore';
+  import { useDataStore } from '@/stores/dataStore';
   import Button from "primevue/button";
   import Menubar from "primevue/menubar";
   import InputText from "primevue/inputtext";
+
+  
 
   export default {
     components: { Button, Menubar, InputText },
@@ -55,6 +58,7 @@
         email: '',
         password: '',
         authStore: useAuthStore(),
+        dataStore: useDataStore(),
         items: [
           {
             label: 'Главная страница',
